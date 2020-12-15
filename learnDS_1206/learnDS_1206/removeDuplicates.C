@@ -29,7 +29,7 @@ int removeDuplicates(int* nums, int numsSize) {
     return idx;
 }
 
-int main() {
+int main2() {
     int nums[2] = { 1,1 };
     int len = removeDuplicates(nums, sizeof(nums) / sizeof(nums[0]));
     for (int i = 0; i < len; i++)
