@@ -17,7 +17,7 @@ void rotate(int* nums, int numsSize, int k) {
     }
 }
 
-int main() {
+int main3() {
     int nums[4] = { 1,2,3,4 };
     rotate(nums, sizeof(nums) / sizeof(nums[0]), 2);
     for (int i = 0; i < 4; i++) {
