@@ -6,7 +6,7 @@ struct ListNode {
     struct ListNode* next;
 };
 
-struct ListNode* reverseList(struct ListNode* head) {
+struct ListNode* reverseList1(struct ListNode* head) {
     struct ListNode* head2 = NULL;
     //当原有节点不为空时进行循环
     while (head != NULL) {
@@ -19,4 +19,17 @@ struct ListNode* reverseList(struct ListNode* head) {
         head2 = cur;
     }
     return head2;
+}
+
+struct ListNode* middleNode2(struct ListNode* head) {
+    //设置快慢指针
+    struct ListNode* fast, * slow;
+    fast = slow = head;
+    //当快指针为最后一个节点或者为空是结束循环
+    while (fast && fast->next) {
+        //快指针步长为2，慢指针步长为1
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
 }
