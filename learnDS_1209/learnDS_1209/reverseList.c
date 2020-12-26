@@ -21,7 +21,7 @@ struct ListNode* reverseList1(struct ListNode* head) {
     return head2;
 }
 
-struct ListNode* middleNode2(struct ListNode* head) {
+struct ListNode* middleNode22(struct ListNode* head) {
     //ÉèÖÃ¿ìÂıÖ¸Õë
     struct ListNode* fast, * slow;
     fast = slow = head;
