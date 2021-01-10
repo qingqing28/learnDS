@@ -210,7 +210,7 @@ void test() {
 
 }
 
-int main() {
+int main1() {
 	test();
 	return 0;
 }
