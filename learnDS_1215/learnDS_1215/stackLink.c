@@ -126,7 +126,7 @@ int test3() {
 	printf("%d", stackEmpty(&st));//1±íÊ¾Õ»Îª¿Õ
 }
 
-int main() {
+int main3() {
 	test3();
 	return 0;
 }
