@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//链表实现栈
 typedef int STDataType;
 typedef struct LstkNode {
 	STDataType data;
@@ -10,7 +11,7 @@ typedef struct LstkNode {
 typedef struct Stack {
 	ListNode* head;
 	ListNode* top;
-} Stack;
+} stack;
 
 //创建新的节点
 ListNode* createListnode(STDataType val) {
@@ -21,10 +22,10 @@ ListNode* createListnode(STDataType val) {
 
 //打印节点的值
 void printListNode(ListNode* node) {
-	printf("%d\n", node->data);
+	printf("栈顶元素=%d\n", node->data);
 }
 //初始化栈
-void stackInit(Stack* st) {
+void stackLinkInit(stack* st) {
 	if (st == NULL)
 		return;
 	//使st->head成为一个带头单向循环链表
@@ -36,7 +37,7 @@ void stackInit(Stack* st) {
 }
 
 //入栈
-void stackPush(Stack* st, STDataType val) {
+void stackLinkPush(stack* st, STDataType val) {
 	if (st == NULL)
 		return;
 	ListNode* node = createListnode(val);
@@ -52,7 +53,7 @@ void stackPush(Stack* st, STDataType val) {
 }
 
 //出栈
-void stackPop(Stack* st) {
+void stackLinkPop(stack* st) {
 	if (st == NULL || st->top == st->head)
 		return;
 	ListNode* next = st->top->next;
@@ -64,14 +65,14 @@ void stackPop(Stack* st) {
 }
 
 //获取栈顶元素
-STDataType stackTop(Stack* st) {
+STDataType stackLinkTop(stack* st) {
 	//栈一定不为空栈
 	if (st == NULL)
 		return ; 
 	return st->top;
 }
 //返回栈的长度
-int stackSize(Stack* st) {
+int stackLinkSize(stack* st) {
 	if (st == NULL || st->top == st->head)
 		return 0;
 	int k = 0;
@@ -85,14 +86,14 @@ int stackSize(Stack* st) {
 }
 
 //判断栈是否为空
-int stackEmpty(Stack* st) {
+int stackLinkEmpty(stack* st) {
 	if (st == NULL || st->top == st->head)
 		return 1;
 	return 0;
 }
 
 //销毁栈
-void stackDestroy(Stack* st) {
+void stackLinkDestroy(stack* st) {
 	if (st == NULL)
 		return;
 	ListNode* cur = st->head->next;
@@ -108,25 +109,21 @@ void stackDestroy(Stack* st) {
 	st->top = NULL;
 }
 
-int test3() {
-	Stack st;
-	stackInit(&st);//初始化栈
+int testStackLink() {
+	stack st;
+	stackLinkInit(&st);//初始化栈
 	//入栈
-	stackPush(&st, 1);
-	stackPush(&st, 2);
-	stackPush(&st, 3);
+	stackLinkPush(&st, 1);
+	stackLinkPush(&st, 2);
+	stackLinkPush(&st, 3);
 	//栈为1 2 3
-	printListNode(stackTop(&st));//获取栈顶元素3
-	stackPop(&st);//出栈，栈为1 2
-	printf("%d \n", stackSize(&st));//栈的大小为2
-	printListNode(stackTop(&st));//获取栈顶元素2
-	stackPop(&st);//出栈，栈为1
-	printf("%d\n" , stackEmpty(&st));//0表示栈不为空
-	stackDestroy(&st);//销毁栈
-	printf("%d", stackEmpty(&st));//1表示栈为空
+	printListNode(stackLinkTop(&st));//获取栈顶元素3
+	stackLinkPop(&st);//出栈，栈为1 2
+	printf("栈的大小=%d \n", stackLinkSize(&st));//栈的大小为2
+	printListNode(stackLinkTop(&st));//获取栈顶元素2
+	stackLinkPop(&st);//出栈，栈为1
+	printf("栈是否为空：%d\n" , stackLinkEmpty(&st));//0表示栈不为空
+	stackLinkDestroy(&st);//销毁栈
+	printf("栈是否为空：%d", stackLinkEmpty(&st));//1表示栈为空
 }
 
-int main3() {
-	test3();
-	return 0;
-}
