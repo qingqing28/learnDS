@@ -7,16 +7,16 @@ typedef struct Queue {
 	QDataType* data;//存储队列的数据
 	int rear;  //表示队尾，指向队列最后一个元素的下一个位置
 	int capacity;//表示数组的大小
-}Queue;
+}queue;
 
 // 初始化队列
-void QueueInit(Queue* q) {
+void QueueInit(queue* q) {
 	q->data = NULL;
 	q->rear = 0;
 	q->capacity = 0;
 }
 //检查容量
-void checkCapacity(Queue* q) {
+void checkCapacity(queue* q) {
 	if (q == NULL)
 		return;
 	if (q->rear == q->capacity) {
@@ -28,7 +28,7 @@ void checkCapacity(Queue* q) {
 }
 
 // 队尾入队列
-void QueuePush(Queue* q, QDataType data) {
+void QueuePush(queue* q, QDataType data) {
 	if (q == NULL)
 		return;
 	checkCapacity(q);
@@ -37,14 +37,14 @@ void QueuePush(Queue* q, QDataType data) {
 }
 
 // 检测队列是否为空，如果为空返回非零结果，如果非空返回0
-int QueueEmpty(Queue* q) {
+int QueueEmpty(queue* q) {
 	if (q->rear == 0)
 		return 1;
 	return 0;
 }
 
 // 队头出队列(头插）
-void QueuePop(Queue* q) {
+void QueuePop(queue* q) {
 	if (q == NULL || QueueEmpty(q) == 1)
 		return;
 	//将数据向后移动
@@ -55,28 +55,28 @@ void QueuePop(Queue* q) {
 }
 
 // 获取队列头部元素
-QDataType QueueFront(Queue* q) {
+QDataType QueueFront(queue* q) {
 	return q->data[0];
 }
 // 获取队列队尾元素
-QDataType QueueBack(Queue* q) {
+QDataType QueueBack(queue* q) {
 	return q->data[q->rear - 1];
 }
 // 获取队列中有效元素个数
-int QueueSize(Queue* q) {
+int QueueSize(queue* q) {
 	return q->rear;
 }
 
 // 销毁队列
-void QueueDestroy(Queue* q) {
+void QueueDestroy(queue* q) {
 	free(q->data);
 	q->data = NULL;
 	q->capacity = 0;
 	q->rear = 0;
 }
 
-int main() {
-	Queue q;
+int testQueueArr(){
+	queue q;
 	QueueInit(&q);
 	QueuePush(&q, 1);
 	QueuePush(&q, 2);
