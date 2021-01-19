@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #include"stack.h"
 
-
-void stackInit1(Stack* st) {
+//动态数组实现栈
+void stackInit(Stack* st) {
 	if (st == NULL)
 		return;
 	st->data = NULL;
@@ -12,7 +12,7 @@ void stackInit1(Stack* st) {
 	st->capacity = 0;
 }
 
-void checkCapacity1(Stack* st) {
+void checkCapacity(Stack* st) {
 	if (st == NULL)
 		return;
 	//若数组存储满了，则进行扩容
@@ -24,17 +24,17 @@ void checkCapacity1(Stack* st) {
 	}
 }
 
-void stackPush1(Stack* st, STDataType val) {
+void stackPush(Stack* st, STDataType val) {
 	if (st == NULL)
 		return;
 	//检查栈是否满了
-	checkCapacity1(st);
+	checkCapacity(st);
 	//进行入栈，栈顶+1 ，存入数据
 	st->top++;
 	st->data[st->top] = val;
 }
 
-void stackPop1(Stack* st) {
+void stackPop(Stack* st) {
 	//若栈中无数据则进行返回
 	if (st == NULL || st->top == -1) {
 		return;
@@ -44,34 +44,34 @@ void stackPop1(Stack* st) {
 }
 
 //获取栈顶元素
-STDataType stackTop1(Stack* st) {
+STDataType stackTop(Stack* st) {
 	//前提是栈中有有效元素
 	return st->data[st->top];
 }
 
 //获取栈中的有效元素个数
-int stackSize1(Stack* st) {
+int stackSize(Stack* st) {
 	if (st == NULL)
 		return 0;
 	return (st->top) + 1;
 }
 
 //检测栈是否为空，如果为空返回非零结果，如果不为空返回0
-int stackEmpty1(Stack* st) {
+int stackEmpty(Stack* st) {
 	if (st == NULL || st->top == -1)
 		return 1;
 	return 0;
 }
 
 //销毁栈
-void stackDestroy1(Stack* st) {
+void stackDestroy(Stack* st) {
 	free(st->data);
 	st->data = NULL;
 	st->top = -1;
 	st->capacity = 0;
 }
 
-void test1() {
+void testStack() {
 	Stack st;
 	stackInit(&st);
 	//入栈
@@ -81,16 +81,11 @@ void test1() {
 	stackPush(&st, 3);
 	//栈为0 1 2 3
 	STDataType s = stackTop(&st);
-	printf("%d ", s);
+	printf("栈顶元素=%d\n", s);
 	stackPop(&st);
 	//出栈，栈为0 1 2
-	printf("%d ", stackSize(&st));//打印栈的大小--3
-	printf("%d ", stackEmpty(&st));//0表示栈不为空
+	printf("栈的大小=%d\n", stackSize(&st));//打印栈的大小--3
+	printf("栈是否为空：%d\n", stackEmpty(&st));//0表示栈不为空
 	stackDestroy(&st);//销毁栈
-	printf("%d ", stackEmpty(&st));
-}
-
-int main2() {
-	test1();
-	return 0; 
+	printf("栈是否为空%d\n", stackEmpty(&st));
 }
