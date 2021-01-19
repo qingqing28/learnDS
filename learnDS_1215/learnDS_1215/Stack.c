@@ -71,21 +71,4 @@ void stackDestroy(Stack* st) {
 	st->capacity = 0;
 }
 
-void testStack() {
-	Stack st;
-	stackInit(&st);
-	//入栈
-	stackPush(&st, 0);
-	stackPush(&st, 1);
-	stackPush(&st, 2);
-	stackPush(&st, 3);
-	//栈为0 1 2 3
-	STDataType s = stackTop(&st);
-	printf("栈顶元素=%d\n", s);
-	stackPop(&st);
-	//出栈，栈为0 1 2
-	printf("栈的大小=%d\n", stackSize(&st));//打印栈的大小--3
-	printf("栈是否为空：%d\n", stackEmpty(&st));//0表示栈不为空
-	stackDestroy(&st);//销毁栈
-	printf("栈是否为空%d\n", stackEmpty(&st));
-}
+
