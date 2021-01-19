@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//队列的单向无头非循环链表的实现
 typedef int QDataType;
-
 typedef struct QNode {
 	QDataType data;
 	struct QNode* next;
@@ -92,7 +92,7 @@ void queueDestroy(Queue* q) {
 	q->front = q->rear = NULL;
 }
 
-int main1() {
+int testQueue() {
 	Queue q;
 	queueInit(&q);
 	queuePush(&q, 1);
