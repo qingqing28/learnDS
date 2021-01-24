@@ -4,7 +4,7 @@
 typedef int HPDataType;
 /*实现数组中两个位置值的交换*/
 void Swap(HPDataType* arr, int idx1, int idx2) {
-	int tmp = arr[idx1];
+	HPDataType tmp = arr[idx1];
 	arr[idx1] = arr[idx2];
 	arr[idx2] = tmp;
 }
