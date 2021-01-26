@@ -2,8 +2,8 @@
 #include<stdlib.h>
 
 int main() {
-	//testHeap();
+	testHeap();
 	//testShifDown();
-	testHeapSort();
+	//testHeapSort();
 	return 0;
 }
