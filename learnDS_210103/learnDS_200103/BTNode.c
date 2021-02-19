@@ -1,12 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include"queue.h"
+#include"BTNode.h"
 
-typedef char BTDataType;
-typedef struct BinaryTreeTNode {
-	BTDataType data;
-	struct BinaryTreeNode* left;
-	struct BinaryTreeNode* right;
-}BTNode;
+
 // 通过前序遍历的数组"ABD##E#H##CF##G##"构建二叉树
 BTNode* binaryTreeCreate(BTDataType arr[], int n, int* idx) {
 	// 递归停止条件
@@ -91,7 +88,7 @@ int binaryTreeLevelKSize(BTNode* root, int k) {
 BTNode* binaryTreeFind(BTNode* root, BTDataType x) {
 	if (root == NULL)
 		return NULL;
-	if (root->data = x)
+	if (root->data == x)
 		return root;
 	BTNode* node = binaryTreeFind(root->left, x);
 	//若节点不在左子树，则在右子树中查找
@@ -112,9 +109,56 @@ void binaryTreeDestory(BTNode** root) {
 
 
 // 层序遍历
-void BinaryTreeLevelOrder(BTNode* root);
+void BinaryTreeLevelOrder(BTNode* root) {
+	//借助队列保存节点
+	Queue q;
+	queueInit(&q);
+	if (root)
+		queuePush(&q, root);
+	while (!queueEmpty(&q)) {
+		//获取队头元素
+		BTNode* node = queueFront(&q);
+		printf("%c ", node->data);
+		//出队
+		queuePop(&q);
+		//保存队头元素的左右孩子节点
+		if (node->left)
+			queuePush(&q, node->left);
+		if (node->right)
+			queuePush(&q, node->right);
+	}
+	queueDestroy(&q);
+	printf("\n");
+}
+
 // 判断二叉树是否是完全二叉树
-int BinaryTreeComplete(BTNode* root);
+int BinaryTreeComplete(BTNode* root) {
+	//借助队列实现判断是否为完全二叉树
+	Queue q;
+	queueInit(&q);
+	//队列中存储的数据类型为BTNode*
+	if (root)
+		queuePush(&q, root);
+	while (!queueEmpty(&q)) {
+		//获取队头元素并弹出
+		BTNode* front = queueFront(&q);
+		queuePop(&q);
+		if (front) {
+			queuePush(&q, front->left);
+			queuePush(&q, front->right);
+		}
+		else
+			break;
+	}
+	//判断剩余元素是否全为空节点
+	while (!queueEmpty(&q)) {
+		BTNode* front = queueFront(&q);
+		if (front)
+			return 0;
+		queuePop(&q);
+	}
+	return 1;
+}
 
 void testBTNode() {
 	char arr[] = { 'A','B','D','#','#','E','#','H','#','#','C','F','#','#','G','#','#' };
@@ -132,11 +176,15 @@ void testBTNode() {
 	printf("二叉树节点的个数=%d\n",num);
 	printf("二叉树的叶子节点数=%d\n", binaryTreeLeafSize(root));
 	printf("二叉树第3层节点数=%d\n", binaryTreeLevelKSize(root, 3));
-	BTNode* node = binaryTreeFind(root, 'D');
+	BTNode* node = binaryTreeFind(root, 'B');
 	if (node)
 		printf("找到节点,节点值为：%c\n", node->data);
 	else
 		printf("未找到节点\n");
+
+	printf("层次遍历：");
+	BinaryTreeLevelOrder(root);
+	printf("二叉树是否为完全二叉树：%d\n", BinaryTreeComplete(root));
 
 	//销毁二叉树
 	binaryTreeDestory(&root);

@@ -123,7 +123,7 @@ void listInsert(List* lst,  ListNode* node,LDataType val) {
 //查找第n个位置的节点
 ListNode* listFindByIdx(List* lst, int n) {
 	if (lst == NULL || lst->head->next == lst->head)
-		return;
+		return NULL;
 	ListNode* cur = lst->head;
 	int len = 0;
 	while (len < n && cur) {
@@ -136,13 +136,14 @@ ListNode* listFindByIdx(List* lst, int n) {
 //查找某个节点
 ListNode* listFind(List* lst, LDataType val) {
 	if (lst == NULL || lst->head->next == lst->head)
-		return;
+		return NULL;
 	ListNode* cur = lst->head->next;
 	while (cur != lst->head) {
 		if (cur->data == val)
 			break;
 		cur = cur->next;
 	}
+	return cur;
 }
 
 //求链表的长度
